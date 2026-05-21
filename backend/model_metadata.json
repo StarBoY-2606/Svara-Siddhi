@@ -1,0 +1,68 @@
+{
+    "model_type": "ravdess",
+    "accuracy": 0.7673611111111112,
+    "samples": 1440,
+    "actors_trained": 24,
+    "timestamp": "2026-05-20 23:13:35",
+    "training_duration_seconds": 388,
+    "feature_importances": [
+        {
+            "feature": "Chroma_12",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_18",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_16",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_15",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_14",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_13",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_12",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_11",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_10",
+            "importance": 0.0
+        },
+        {
+            "feature": "MFCC_9",
+            "importance": 0.0
+        }
+    ],
+    "metrics": {
+        "Tamasic": {
+            "precision": 0.7168141592920354,
+            "recall": 0.7043478260869566,
+            "f1-score": 0.7105263157894737
+        },
+        "Rajasic": {
+            "precision": 0.8189655172413793,
+            "recall": 0.8260869565217391,
+            "f1-score": 0.8225108225108225
+        },
+        "Sattvic": {
+            "precision": 0.7627118644067796,
+            "recall": 0.7758620689655172,
+            "f1-score": 0.7692307692307693
+        }
+    },
+    "description": "Premium bio-acoustic model trained on scientific vocal recordings from the Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS)."
+}

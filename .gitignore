@@ -1,0 +1,14 @@
+# Ignore backend files
+backend/venv/
+backend/__pycache__/
+backend/ravdess_temp/
+
+# Ignore Flutter files anywhere in the project
+**/build/
+**/.dart_tool/
+**/.pub-cache/
+**/.fvm/
+
+# Ignore IDE files
+.idea/
+.vscode/

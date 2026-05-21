@@ -1,0 +1,21 @@
+workflows:
+  android-release:
+    name: Svara-Siddhi Android APK
+    max_build_duration: 60
+    environment:
+      flutter: 3.22.0
+      java: 17
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build debug APK
+        script: flutter build apk --debug --no-tree-shake-icons
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
+    publishing:
+      email:
+        recipients:
+          - your@email.com   # ← Change this to your email
+        notify:
+          success: true
+          failure: true
