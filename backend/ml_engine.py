@@ -273,31 +273,25 @@ def analyze_sentiment(transcript: str) -> str:
     return "Tamasic"
 
 
-_whisper_model = None
-
-
 def transcribe_audio(wav_path: str) -> str:
-    """Transcribe audio locally using faster-whisper. Returns empty string on failure."""
-    global _whisper_model
-
-    try:
-        from faster_whisper import WhisperModel
-
-        if _whisper_model is None:
-            _whisper_model = WhisperModel(
-                "tiny",
-                device="cpu",
-                compute_type="int8",
-            )
-
-        segments, _ = _whisper_model.transcribe(wav_path)
-        transcript = " ".join(segment.text.strip() for segment in segments)
-        return transcript.strip()
-
-    except Exception as e:
-        logger.warning(f"Local Whisper transcription failed: {e}")
+    """Transcribe audio using OpenAI Whisper API. Returns empty string on failure."""
+    api_key = os.getenv("OPENAI_API_KEY", "")
+    if not api_key:
+        logger.warning("OPENAI_API_KEY not set — skipping transcription.")
         return ""
-
+    try:
+        from openai import OpenAI
+        client = OpenAI(api_key=api_key)
+        with open(wav_path, "rb") as f:
+            result = client.audio.transcriptions.create(
+                model="whisper-1",
+                file=f,
+                response_format="text",
+            )
+        return str(result)
+    except Exception as e:
+        logger.warning(f"Whisper transcription failed: {e}")
+        return ""
 
 
 def predict_guna(features: dict, sentiment: str, vpi_baseline: str) -> tuple[str, list[float]]:
