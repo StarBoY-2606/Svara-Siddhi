@@ -39,7 +39,7 @@ class ApiService {
       await http.MultipartFile.fromPath('audio_file', audioFile.path),
     );
 
-    final streamed = await request.send().timeout(const Duration(seconds: 60));
+    final streamed = await request.send().timeout(const Duration(seconds: 180));
     final response = await http.Response.fromStream(streamed);
 
     if (response.statusCode == 200) {
@@ -54,7 +54,7 @@ class ApiService {
     try {
       final response = await http
           .get(Uri.parse('$_base/healthz'))
-          .timeout(const Duration(seconds: 5));
+          .timeout(const Duration(seconds: 60));
       return response.statusCode == 200;
     } catch (_) {
       return false;
@@ -64,7 +64,7 @@ class ApiService {
   Future<Map<String, dynamic>> getModelStatus() async {
     final response = await http
         .get(Uri.parse('$_base/api/model/status'))
-        .timeout(const Duration(seconds: 15));
+        .timeout(const Duration(seconds: 60));
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body) as Map<String, dynamic>;
@@ -79,7 +79,7 @@ class ApiService {
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({'max_actors': maxActors}),
         )
-        .timeout(const Duration(seconds: 15));
+        .timeout(const Duration(seconds: 120));
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body) as Map<String, dynamic>;
